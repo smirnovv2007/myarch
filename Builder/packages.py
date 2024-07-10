@@ -28,13 +28,12 @@ AUR_PACKAGES = [
 ##==> Дев пакеты (не обязательные)
 #######################################
 DEV_PACKAGES = [
-    "bleachbit", "gnome-firmware", "touche", "neovim", "obs-studio", "telegram-desktop",
-    "tmux", "youtube-dl", "cowsay", "sqlitebrowser", "obsidian",
-    "python-pip", "bpython", "ipython"
+    "bleachbit", "gnome-firmware", "touche", "neovim", "obs-studio",
+    "tmux", "youtube-dl", "cowsay", "sqlitebrowser", "python-pip"
 ]
 
 AUR_DEV_PACKAGES = [
-    "yandex-browser", "jetbrains-toolbox"
+    "google-chrome", "jetbrains-toolbox"
 ]
 
 GNOME_OFFICIAL_TOOLS = [
