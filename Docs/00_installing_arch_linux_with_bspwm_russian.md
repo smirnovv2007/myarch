@@ -83,8 +83,7 @@ mount /dev/sda1 /mnt/boot
 ### Сборка ядра и базовых софтов
 ```bash
 # Устанавливаем базовые софты
-pacstrap -K /mnt base linux linux-firmware base-devel lvm2
-dhcpcd net-tools iproute2 networkmanager vim micro efibootmgr iwd
+pacstrap -K /mnt base linux linux-firmware base-devel lvm2 dhcpcd net-tools iproute2 networkmanager vim nano nano efibootmgr iwd
 
 # Генерируем fstab
 genfstab -U /mnt >> /mnt/etc/fstab
@@ -94,7 +93,7 @@ cat /mnt/etc/fstab
 arch-chroot /mnt
 
 # Нужно раскомментировать ru_RU и en_US в этом файле
-micro /etc/locale.gen
+nano /etc/locale.gen
 
 # Генерируем локали
 locale-gen
@@ -115,7 +114,7 @@ passwd user
 systemctl enable dhcpcd
 systemctl enable iwd.service
 
-micro /etc/mkinitcpio.conf
+nano /etc/mkinitcpio.conf
 # Пересборка ядра. Найдите строку HOOKS=(base udev autodetect modconf kms
 # keyboard keymap consolefont block filesystems fsck)
 
@@ -131,7 +130,7 @@ mkinitcpio -p linux
 ```bash
 bootctl install --path=/boot
 cd /boot/loader
-micro loader.conf
+nano loader.conf
 
 # Вставляем в loader.conf следующий конфиг:
 timeout 3
@@ -139,17 +138,17 @@ default arch
 
 # Создаем конфигурацию для запуска
 cd /boot/loader/entries
-micro arch.conf
+nano arch.conf
 
 # Вставляем в arch.conf следующее:
 # UUID можно узнать командой blkid
 title Arch Linux by ZProger
 linux /vmlinuz-linux
 initrd /initramfs-linux.img
-options rw cryptdevice=UUID=uuid_от_/dev/sda2:main root=/dev/mapper/main-root
+options rw cryptdevice=UUID=ENTER_UUID_HERE:main root=/dev/mapper/main-root
 
 # Выдаем права на sudo
-sudo EDITOR=micro visudo
+sudo EDITOR=nano visudo
 # После открытия раскомментируйте %wheel ALL=(ALL:ALL) ALL
 
 # Выходим из системы и перезагружаемся
@@ -170,7 +169,7 @@ sudo pacman -Sy
 sudo pacman -S xorg bspwm sxhkd xorg-xinit xterm git python3
 
 # Настройка xinitrc
-micro /etc/X11/xinit/xinitrc
+nano /etc/X11/xinit/xinitrc
 
 # Отключите любые другие строки exec и добавьте в конец файла строку:
 exec bspwm
@@ -182,8 +181,8 @@ exec bspwm
 
 и выполните сборку оболочки используя данные команды:
 ```bash
-git clone https://github.com/DIMFLIX-OFFICIAL/meowrch.git
-cd meowrch
+git clone https://github.com/smirnovv2007/myarch.git
+cd myarch
 python3 Builder/install.py
 ```
 
